@@ -4,8 +4,8 @@ const Home = () => {
   return (
     <div>
       <HomeBanner />
-      <Exercises />
       <SearchExercises />
+      <Exercises />
     </div>
   );
 };

@@ -2,8 +2,8 @@ import HomeImg from "../assets/HomeImg.png";
 
 const HomeBanner = () => {
   return (
-    <div className="relative sm:flex sm:-top-20 grid grid-rows-2">
-      <div style={{ flex: 1 }} className="lg:mt-52 sm:mt-52 ml-11 mt-32  ">
+    <div className="relative sm:flex sm:-top-24 grid grid-rows-2">
+      <div style={{ flex: 1 }} className="lg:mt-52 sm:mt-52 ml-11 mt-32">
         <p className="text-themeRed font-semibold text-xl lg:text-xl">
           Fitness Club
         </p>
