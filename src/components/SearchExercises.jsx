@@ -1,18 +1,47 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { excerciseOptions, fetchData } from "../utils/fetchData";
 
 const SearchExercises = () => {
   const [search, setSearch] = useState("");
+  const [exercises, setExercises] = useState([]);
+  const [bodyPart, setBodyPart] = useState([]);
+
   console.log(search);
   const handleSearch = async () => {
     if (search) {
-      const fetchd = await fetchData(
-        `https://exercisedb.p.rapidapi.com/exercises/bodyPart/${search}`,
+      const ExcercisesData = await fetchData(
+        "https://exercisedb.p.rapidapi.com/exercises",
         excerciseOptions
       );
-      console.log(fetchd);
+
+      const searchedExercises = ExcercisesData.filter((exercise) => {
+        return (
+          exercise.name.toLowerCase().includes(search) ||
+          exercise.target.toLowerCase().includes(search) ||
+          exercise.equipment.toLowerCase().includes(search) ||
+          exercise.bodyPart.toLowerCase().includes(search)
+        );
+      });
+
+      setSearch("");
+      setExercises(searchedExercises);
     }
   };
+
+  useEffect(() => {
+    const fetchExercises = async () => {
+      const bodyParts = await fetchData(
+        "https://exercisedb.p.rapidapi.com/exercises/bodyPart",
+        excerciseOptions
+      );
+
+      setBodyPart([...bodyParts]);
+    };
+    fetchExercises();
+  }, []);
+
+  console.log("excerises", exercises);
+  console.log("bodyParts", bodyPart);
 
   return (
     <div className="flex justify-center items-center flex-col">
@@ -30,6 +59,7 @@ const SearchExercises = () => {
           value={search}
           onChange={(e) => setSearch(e.target.value.toLowerCase())}
         />
+
         <button
           className="bg-themeRed text-white w-1/6 rounded"
           onClick={() => handleSearch()}
