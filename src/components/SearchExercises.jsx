@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { excerciseOptions, fetchData } from "../utils/fetchData";
+import { HorizontalScrollBar } from ".";
 
 const SearchExercises = () => {
   const [search, setSearch] = useState("");
@@ -31,7 +32,7 @@ const SearchExercises = () => {
   useEffect(() => {
     const fetchExercises = async () => {
       const bodyParts = await fetchData(
-        "https://exercisedb.p.rapidapi.com/exercises/bodyPart",
+        "https://exercisedb.p.rapidapi.com/exercises",
         excerciseOptions
       );
 
@@ -66,6 +67,9 @@ const SearchExercises = () => {
         >
           Search
         </button>
+      </div>
+      <div>
+        <HorizontalScrollBar data={bodyPart} />
       </div>
     </div>
   );
