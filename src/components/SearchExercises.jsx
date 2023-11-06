@@ -2,12 +2,13 @@ import { useEffect, useState } from "react";
 import { excerciseOptions, fetchData } from "../utils/fetchData";
 import { HorizontalScrollBar } from ".";
 
-const SearchExercises = () => {
+const SearchExercises = (props) => {
   const [search, setSearch] = useState("");
-  const [exercises, setExercises] = useState([]);
-  const [bodyPart, setBodyPart] = useState([]);
+  // const [exercises, setExercises] = useState([]);
+  const [bodyParts, setBodyParts] = useState([]);
 
-  console.log(search);
+  const { setExercises, bodyPart, setBodyPart } = { ...props };
+
   const handleSearch = async () => {
     if (search) {
       const ExcercisesData = await fetchData(
@@ -36,13 +37,13 @@ const SearchExercises = () => {
         excerciseOptions
       );
 
-      setBodyPart([...bodyParts]);
+      setBodyParts([...bodyParts]);
     };
     fetchExercises();
   }, []);
 
-  console.log("excerises", exercises);
-  console.log("bodyParts", bodyPart);
+  // console.log("excerises", exercises);
+  // console.log("bodyParts", bodyPart);
 
   return (
     <div className="flex justify-center items-center flex-col">
@@ -69,7 +70,11 @@ const SearchExercises = () => {
         </button>
       </div>
       <div>
-        <HorizontalScrollBar data={bodyPart} />
+        <HorizontalScrollBar
+          data={bodyParts}
+          bodyPart={bodyPart}
+          setBodyPart={setBodyPart}
+        />
       </div>
     </div>
   );

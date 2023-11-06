@@ -1,12 +1,17 @@
+import { BodyPart } from "./";
 const horizontalScrollBar = ({ data }) => {
   const filteredExercisesData = [...new Set(data.map((item) => item.bodyPart))];
 
-  console.log(filteredExercisesData);
+  // console.log(filteredExercisesData);
 
   return (
     <div>
       {filteredExercisesData.map((item) => {
-        return <p key={item}>{item}</p>;
+        return (
+          <div key={item}>
+            <BodyPart bodyPartItem={item} />
+          </div>
+        );
       })}
     </div>
   );
