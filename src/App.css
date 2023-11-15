@@ -3,3 +3,8 @@
 .util-border {
     border: 2px solid red;
 }
+
+.swiper {
+    width: 600px;
+    height: 300px;
+}
